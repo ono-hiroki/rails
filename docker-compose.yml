@@ -44,6 +44,8 @@ x-backend: &backend
     HISTFILE: /app/log/.bash_history
     PSQL_HISTFILE: /app/log/.psql_history
     EDITOR: vi
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: password
   depends_on:
     postgres:
       condition: service_healthy
@@ -78,7 +80,7 @@ services:
       PSQL_HISTFILE: /root/log/.psql_history
       POSTGRES_PASSWORD: postgres
     ports:
-      - 5432
+      - '5432:5432'
     healthcheck:
       test: pg_isready -U postgres -h 127.0.0.1
       interval: 5s
